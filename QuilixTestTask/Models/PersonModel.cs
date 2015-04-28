@@ -12,7 +12,7 @@ namespace Qulix.Web.Models
 
         public PersonModel()
         { }
-        public PersonModel(Person person)
+        public PersonModel(IPerson person)
         {
             // TODO: Complete member initialization
             this.PersonId = person.PersonId;

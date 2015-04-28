@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Qulix.Data.Repository
 {
-    interface IEntityRepository<TEntity>
+    public interface IEntityRepository<TEntity>
     {
         TEntity Create(TEntity entity);
         void Delete(TEntity entity);

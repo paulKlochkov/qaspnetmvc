@@ -4,31 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Qulix.Web.Models;
+using Qulix.Data.Repository;
+using Qulix.Data.Common;
 
 namespace Qulix.Web.Controllers
 {
     public class PersonController : Controller
     {
+        //TODO Use DI in futurre
+        private IPersonRepository _personRepository = new PersonRepository();
 
-
-        //// GET: Person
-        //public ActionResult Index()
-        //{
-
-
-        //}
 
         public ActionResult PersonList()
         {
-            List<PersonModel> personRowModel = StaticDS.Persons.Select(x => new PersonModel(x)).ToList();
+            IEnumerable<IPerson> persons = _personRepository.GetAllEnities();
+            List<PersonModel> personRowModel = persons.Select(x => new PersonModel(x)).ToList();
             return View(personRowModel);
         }
 
-        // GET: Person/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+       
 
         // GET: Person/Create
         public ActionResult Create()
@@ -55,8 +49,8 @@ namespace Qulix.Web.Controllers
         // GET: Person/Edit/5
         public ActionResult Edit(int id)
         {
-            PersonModel model = new PersonModel(StaticDS.Persons.FirstOrDefault(x => x.PersonId == id));
-
+            IPerson person = _personRepository.FindById(id);
+            PersonModel model = new PersonModel(person);
             return View(model);
         }
 
