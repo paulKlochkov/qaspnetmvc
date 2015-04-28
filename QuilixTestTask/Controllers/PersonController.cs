@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Quilix.Web.Models;
+using Qulix.Web.Models;
 
-namespace Quilix.Web.Controllers
+namespace Qulix.Web.Controllers
 {
     public class PersonController : Controller
     {
@@ -20,7 +20,8 @@ namespace Quilix.Web.Controllers
 
         public ActionResult PersonList()
         {
-            return View(StaticDS.Persons);
+            List<PersonModel> personRowModel = StaticDS.Persons.Select(x => new PersonModel(x)).ToList();
+            return View(personRowModel);
         }
 
         // GET: Person/Details/5
@@ -37,7 +38,7 @@ namespace Quilix.Web.Controllers
 
         // POST: Person/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(PersonModel model)
         {
             try
             {
@@ -54,14 +55,14 @@ namespace Quilix.Web.Controllers
         // GET: Person/Edit/5
         public ActionResult Edit(int id)
         {
-            Person model = StaticDS.Persons.FirstOrDefault(x => x.PersonId == id);
+            PersonModel model = new PersonModel(StaticDS.Persons.FirstOrDefault(x => x.PersonId == id));
 
             return View(model);
         }
 
         // POST: Person/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Person model)
+        public ActionResult Edit(int id, PersonModel model)
         {
             try
             {

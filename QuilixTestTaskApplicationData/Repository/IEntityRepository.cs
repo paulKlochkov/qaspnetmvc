@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quilix.Data.DAO
+namespace Qulix.Data.Repository
 {
-    interface IDAO<TEntity>
+    interface IEntityRepository<TEntity>
     {
         TEntity Create(TEntity entity);
         void Delete(TEntity entity);
         TEntity Update(TEntity entity);
+        ICollection<TEntity> GetAllEnities();
     }
 }

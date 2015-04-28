@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quilix.Data.Common
+namespace Qulix.Data.Common
 {
     public interface ITask
     {

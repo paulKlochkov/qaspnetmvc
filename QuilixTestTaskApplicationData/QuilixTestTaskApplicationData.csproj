@@ -7,7 +7,7 @@
     <ProjectGuid>{8841C1E8-AA5E-4CA3-BADA-5D84AA2E8923}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Quilix.Data</RootNamespace>
+    <RootNamespace>Qulix.Data</RootNamespace>
     <AssemblyName>QuilixTestTaskApplicationData</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,9 +44,10 @@
     <Compile Include="Common\Person.cs" />
     <Compile Include="Common\Task.cs" />
     <Compile Include="Common\TaskStatus.cs" />
-    <Compile Include="DAO\IDAO.cs" />
-    <Compile Include="DAO\IEntityAssembler.cs" />
+    <Compile Include="Repository\IEntityRepository.cs" />
+    <Compile Include="Repository\IEntityAssembler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Repository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

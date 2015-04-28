@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Quilix.Web
+namespace Qulix.Web
 {
     public class FilterConfig
     {

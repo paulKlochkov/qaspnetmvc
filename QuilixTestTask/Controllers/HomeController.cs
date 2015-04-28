@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Quilix.Web.Controllers
+namespace Qulix.Web.Controllers
 {
     public class HomeController : Controller
     {

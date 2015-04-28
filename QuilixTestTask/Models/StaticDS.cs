@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Quilix.Web.Models;
+using Qulix.Data.Common;
 
-namespace Quilix.Web.Models
+namespace Qulix.Web.Models
 {
     public class StaticDS
     {
         private static List<Person> _persons = new List<Person>();
-        private static List<TaskModel> _tasks = new List<TaskModel>();
+        private static List<Task> _tasks = new List<Task>();
 
         static StaticDS()
         {
@@ -27,14 +27,14 @@ namespace Quilix.Web.Models
             }
             for (int i = 0; i < 100; i++)
             {
-                TaskModel task = new TaskModel
+                Task task = new Task
                 {
-                    TaskId = i+1,
-                    StartDate =DateTime.Now,
+                    TaskId = i + 1,
+                    StartDate = DateTime.Now,
                     EndDate = DateTime.Now,
                     Name = string.Format("Task {0}", 1 + i),
                     Status = Data.Common.TaskStatus.InProcess,
-                    Executor = _persons.FirstOrDefault(x => x.PersonId == i+1),
+                    Executor = _persons.FirstOrDefault(x => x.PersonId == i + 1),
                     EstimatedHours = 8
                 };
                 _tasks.Add(task);
@@ -48,7 +48,7 @@ namespace Quilix.Web.Models
             }
         }
 
-        public static List<TaskModel> Tasks
+        public static List<Task> Tasks
         {
             get
             {

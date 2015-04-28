@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Quilix.Data.Common;
+using Qulix.Data.Common;
 using System.ComponentModel.DataAnnotations;
 
-namespace Quilix.Web.Models
+namespace Qulix.Web.Models
 {
-    public class Person : IPerson
+    public class PersonModel : IPerson
     {
+
+        public PersonModel()
+        { }
+        public PersonModel(Person person)
+        {
+            // TODO: Complete member initialization
+            this.PersonId = person.PersonId;
+            this.FirstName = person.FirstName;
+            this.SecondName = person.SecondName;
+            this.LastName = person.LastName;
+        }
         public int PersonId { get; set; }
 
         [Display(Name = "First name")]

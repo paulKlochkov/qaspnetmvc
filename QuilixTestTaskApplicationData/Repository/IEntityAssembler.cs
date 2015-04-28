@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 
-namespace Quilix.Data.DAO
+namespace Qulix.Data.Repository
 {
-    public interface IEntityAssembler<T>
+    interface IEntityAssembler<TEntity>
     {
-        T Assemble(System.Data.SqlClient.SqlDataReader reader);
+        TEntity Assemble(System.Data.SqlClient.SqlDataReader reader);
     }
 }

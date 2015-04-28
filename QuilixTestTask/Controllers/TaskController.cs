@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Quilix.Web.Models;
+using Qulix.Web.Models;
 
-namespace Quilix.Web.Controllers
+namespace Qulix.Web.Controllers
 {
     public class TaskController : Controller
     {
@@ -16,8 +16,12 @@ namespace Quilix.Web.Controllers
         }
         public ActionResult TaskList()
         {
-
-            return View(StaticDS.Tasks);
+            List<TaskModel> tasks = new List<TaskModel>(StaticDS.Tasks.Count);
+            foreach (var task in StaticDS.Tasks)
+            {
+                tasks.Add(new TaskModel(task));
+            }
+            return View(tasks);
         }
         // GET: Task/Details/5
         public ActionResult Details(int id)
@@ -28,17 +32,25 @@ namespace Quilix.Web.Controllers
         // GET: Task/Create
         public ActionResult Create()
         {
-            return View();
+            TaskCreateModel model = new TaskCreateModel();
+            return View(model);
         }
 
         // POST: Task/Create
         [HttpPost]
-        public ActionResult Create(TaskModel model)
+        public ActionResult Create(TaskCreateModel model)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                StaticDS.Tasks.Add(new Qulix.Data.Common.Task
+                {
+                    EndDate = model.EndDate,
+                    StartDate = model.StartDate,
+                    Name = model.Name,
+                    Status = model.Status,
+                    Executor = StaticDS.Persons.FirstOrDefault(x => x.PersonId == model.ExecutorId)
+                });
                 return RedirectToAction("TaskList");
             }
             catch
@@ -60,6 +72,7 @@ namespace Quilix.Web.Controllers
             try
             {
                 // TODO: Add update logic here
+                var obj = StaticDS.Tasks.FirstOrDefault(x => x.TaskId == id);
 
                 return RedirectToAction("TaskList");
             }
@@ -72,7 +85,7 @@ namespace Quilix.Web.Controllers
         // GET: Task/Delete/5
         public ActionResult Delete(int id)
         {
-            var obj = StaticDS.Tasks.FirstOrDefault(x => x.TaskId == id);
+            var obj = new TaskModel(StaticDS.Tasks.FirstOrDefault(x => x.TaskId == id));
             return View(obj);
         }
 
