@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Qulix.Web.Models.TaskModel>
+﻿@model Qulix.Web.Models.TaskListModel
 
 @{
     ViewBag.Title = "TaskList";
@@ -6,60 +6,75 @@
 }
 
 <h2>TaskList</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TaskId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EstimatedHours)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+@if (Model.PersonCount > 0)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    if (Model.Count > 0)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstimatedHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.TaskId }) |
-                @*@Html.ActionLink("Details", "Details", new { id = item.TaskId }) |*@
-                @Html.ActionLink("Delete", "Delete", new { id = item.TaskId })
-            </td>
-        </tr>
-    }
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Template.TaskId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Template.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Template.EstimatedHours)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Template.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Template.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Template.Executor.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Template.Status)
+                </th>
+                <th></th>
+            </tr>
 
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstimatedHours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Executor.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.TaskId }) |
+                        @*@Html.ActionLink("Details", "Details", new { id = item.TaskId }) |*@
+                        @Html.ActionLink("Delete", "Delete", new { id = item.TaskId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+}
+else
+{
+    <h2>Add users to create tasks</h2>
+}

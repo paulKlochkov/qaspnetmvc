@@ -15,5 +15,12 @@ namespace Qulix.Data.Common
         public string SecondName { get; set; }
 
         public string LastName { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return string.Format("{0} {1} {2}", FirstName, SecondName, LastName);
+            }
+        }
     }
 }

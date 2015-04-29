@@ -12,25 +12,27 @@ namespace Qulix.Web.Controllers
     public class TaskController : Controller
     {
         private ITaskRepository _taskRepository = new TaskRepository();
-
+        private IPersonRepository _personRepository = new PersonRepository();
+        //GET: /Task/TaskList
         public ActionResult TaskList()
         {
             ICollection<ITask> tasks = _taskRepository.GetAllEnities();
-            List<TaskModel> taskModels = tasks.Select(x => new TaskModel(x)).ToList();
-            return View(taskModels);
+            TaskListModel taskListModel = new TaskListModel(tasks);
+            taskListModel.PersonCount = _personRepository.Count();
+            return View(taskListModel);
         }
 
 
         // GET: Task/Create
         public ActionResult Create()
         {
-            TaskCreateModel model = new TaskCreateModel();
+            TaskCreateEditModel model = new TaskCreateEditModel();
             return View(model);
         }
 
         // POST: Task/Create
         [HttpPost]
-        public ActionResult Create(TaskCreateModel model)
+        public ActionResult Create(TaskCreateEditModel model)
         {
             try
             {
@@ -47,13 +49,13 @@ namespace Qulix.Web.Controllers
         public ActionResult Edit(int id)
         {
             ITask task = _taskRepository.FindById(id);
-            TaskCreateModel model = new TaskCreateModel(task);
+            TaskCreateEditModel model = new TaskCreateEditModel(task);
             return View(model);
         }
 
         // POST: Task/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, TaskCreateModel model)
+        public ActionResult Edit(int id, TaskCreateEditModel model)
         {
             try
             {

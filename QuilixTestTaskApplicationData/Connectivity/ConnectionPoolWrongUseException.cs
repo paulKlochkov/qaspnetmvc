@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Qulix.Data.Connectivity
 {
-    class ConnectionPoolWrongUseException : Exception
+    /// <summary>
+    /// Flag exception for wrong use of connection pool
+    /// </summary>
+    public class ConnectionPoolWrongUseException : Exception
     {
     }
 }

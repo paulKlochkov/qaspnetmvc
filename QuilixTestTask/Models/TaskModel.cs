@@ -12,19 +12,22 @@ namespace Qulix.Web.Models
         [Display(Name = "Id")]
         public int TaskId { get; set; }
 
+        [Required(AllowEmptyStrings = false)]
         [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Display(Name = "Estimated")]
         public int EstimatedHours { get; set; }
 
+        [Required]
         [Display(Name = "Start date")]
-        [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
 
+        [Required]
         [Display(Name = "End date")]
-        [DataType(DataType.DateTime)]
         public DateTime EndDate { get; set; }
+
+        [Required]
         [Display(Name = "Status")]
         public TaskStatus Status { get; set; }
 
@@ -58,14 +61,6 @@ namespace Qulix.Web.Models
             }
         }
 
-        [Display(Name = "Executor")]
-        public string FullName
-        {
-            get
-            {
-                return string.Format("{0} {1} {2}", _executor.FirstName, _executor.SecondName, _executor.LastName);
-            }
-        }
 
 
         public int ExecutorId { get; set; }

@@ -15,6 +15,7 @@ namespace Qulix.Data.Repository
         private const string SelectByIdQuery = @"select * from Persons where PersonId = @personId";
         private const string InsertQuery = @"insert into Persons (FirstName,SecondName,LastName) values(@firstName,@secondName,@lastName)";
         private const string DeleteQuery = @"delete from Persons where Persons.PersonId = @personId";
+        private const string CountQuery = @"select count(PersonId) from Persons";
         private const string FindQuery = @"SELECT TOP 1 *
                                                     FROM Persons
                                                     where [PersonId] = @personId";
@@ -144,7 +145,8 @@ namespace Qulix.Data.Repository
             {
                 SqlConnection connection = wrapper.Instance;
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = SelectAllQuery;
+                command.CommandText = SelectByIdQuery;
+                command.Parameters.Add("personId", id);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -156,5 +158,25 @@ namespace Qulix.Data.Repository
             return person;
         }
 
+
+
+        public int Count()
+        {
+            int count = 0;
+            using (var wrapper = ConnectionPool.Instance.GetConnection())
+            {
+                SqlConnection connection = wrapper.Instance;
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = CountQuery;
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        count = reader.GetInt32(0);
+                    }
+                }
+            }
+            return count;
+        }
     }
 }

@@ -1,14 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Qulix.Data.Connectivity
 {
+    /// <summary>
+    /// Pool Wrapper for SqlConnection
+    /// </summary>
     sealed class ConnectionWrapper : IConnectionWrapper
     {
+        private IConnectionPool _connectionPool;
+
         private System.Data.SqlClient.SqlConnection _connection;
+        /// <summary>
+        /// SqlConnection instance
+        /// </summary>
         public System.Data.SqlClient.SqlConnection Instance
         {
             get
@@ -20,7 +24,8 @@ namespace Qulix.Data.Connectivity
                 _connection = value;
             }
         }
-        private IConnectionPool _connectionPool;
+
+
 
         public ConnectionWrapper(System.Data.SqlClient.SqlConnection _connection, IConnectionPool pool, Int32 id)
         {
@@ -29,12 +34,17 @@ namespace Qulix.Data.Connectivity
             Instance = _connection;
         }
 
-
+        /// <summary>
+        /// Return connection to Pool
+        /// </summary>
         public void Dispose()
         {
             _connectionPool.DisposeConnection(this);
         }
 
+        /// <summary>
+        /// Connection wrapper unique id in pool
+        /// </summary>
         public int Id
         {
             get;

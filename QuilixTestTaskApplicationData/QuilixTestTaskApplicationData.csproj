@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,11 +49,9 @@
     <Compile Include="Connectivity\ConnectionPool.cs" />
     <Compile Include="Connectivity\ConnectionPoolWrongUseException.cs" />
     <Compile Include="Connectivity\ConnectionWrapper.cs" />
-    <Compile Include="Connectivity\DatabaseSchemaGenerator.cs" />
     <Compile Include="Connectivity\DataDirectorySqlConnectionFactory.cs" />
     <Compile Include="Connectivity\IConnectionPool.cs" />
     <Compile Include="Connectivity\IConnectionWrapper.cs" />
-    <Compile Include="Connectivity\IDataBaseSchemaGenerator.cs" />
     <Compile Include="Connectivity\ISqlConnectionFactory.cs" />
     <Compile Include="Repository\IEntityRepository.cs" />
     <Compile Include="Repository\IEntityAssembler.cs" />

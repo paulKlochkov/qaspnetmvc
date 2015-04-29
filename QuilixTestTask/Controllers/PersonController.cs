@@ -11,7 +11,6 @@ namespace Qulix.Web.Controllers
 {
     public class PersonController : Controller
     {
-        //TODO Use DI in futurre
         private IPersonRepository _personRepository = new PersonRepository();
 
 
@@ -79,7 +78,6 @@ namespace Qulix.Web.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
                 _personRepository.DeleteById(id);
                 return RedirectToAction("PersonList");
             }

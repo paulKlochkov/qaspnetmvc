@@ -6,5 +6,6 @@ namespace Qulix.Data.Repository
     {
         IPerson FindById(int id);
         void DeleteById(int id);
+        int Count();
     }
 }

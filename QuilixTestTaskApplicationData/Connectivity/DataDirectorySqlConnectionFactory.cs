@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Configuration;
+
 namespace Qulix.Data.Connectivity
 {
     public class DataDirectorySqlConnectionFactory : ISqlConnectionFactory
@@ -17,6 +15,10 @@ namespace Qulix.Data.Connectivity
             }
             _connectionString = connectionString;
         }
+        /// <summary>
+        /// Create new connection
+        /// </summary>
+        /// <returns></returns>
         public System.Data.SqlClient.SqlConnection CreateNew()
         {
             var connection = new System.Data.SqlClient.SqlConnection(_connectionString);

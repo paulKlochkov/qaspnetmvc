@@ -12,5 +12,6 @@ namespace Qulix.Data.Common
         string FirstName { get; set; }
         string SecondName { get; set; }
         string LastName { get; set; }
+        string FullName { get; }
     }
 }

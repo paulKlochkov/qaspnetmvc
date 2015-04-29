@@ -3,6 +3,9 @@ using Qulix.Data.Common;
 
 namespace Qulix.Data.Repository
 {
+    /// <summary>
+    /// Assembles task from datareader
+    /// </summary>
     class TaskAssembler : IEntityAssembler<ITask>
     {
         public ITask Assemble(System.Data.SqlClient.SqlDataReader reader)

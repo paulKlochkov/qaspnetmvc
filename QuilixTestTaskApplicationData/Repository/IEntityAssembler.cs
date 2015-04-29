@@ -9,6 +9,11 @@ namespace Qulix.Data.Repository
 {
     interface IEntityAssembler<TEntity>
     {
+        /// <summary>
+        /// Assembles entity from SqlDataReader
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
         TEntity Assemble(System.Data.SqlClient.SqlDataReader reader);
     }
 }
