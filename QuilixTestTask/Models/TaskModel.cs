@@ -9,11 +9,13 @@ namespace Qulix.Web.Models
 {
     public class TaskModel : ITask
     {
-
-        [ScaffoldColumn(false)]
+        [Display(Name = "Id")]
         public int TaskId { get; set; }
+
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
+        [Display(Name = "Estimated")]
         public int EstimatedHours { get; set; }
 
         [Display(Name = "Start date")]
@@ -32,7 +34,8 @@ namespace Qulix.Web.Models
         {
 
         }
-        public TaskModel(Task task)
+
+        public TaskModel(ITask task)
         {
             TaskId = task.TaskId;
             Name = task.Name;
@@ -41,6 +44,7 @@ namespace Qulix.Web.Models
             EndDate = task.EndDate;
             Status = task.Status;
             Executor = task.Executor;
+            ExecutorId = task.ExecutorId;
         }
         public IPerson Executor
         {
@@ -62,5 +66,8 @@ namespace Qulix.Web.Models
                 return string.Format("{0} {1} {2}", _executor.FirstName, _executor.SecondName, _executor.LastName);
             }
         }
+
+
+        public int ExecutorId { get; set; }
     }
 }

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Qulix.Data.Repository
 {
-    public interface IEntityRepository<TEntity>
+    public interface IEntityRepository<TKey, TEntity>
     {
         TEntity Create(TEntity entity);
         void Delete(TEntity entity);
         TEntity Update(TEntity entity);
+        TEntity Update(TKey key, TEntity value);
         ICollection<TEntity> GetAllEnities();
     }
 }

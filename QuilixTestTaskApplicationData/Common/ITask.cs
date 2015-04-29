@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Qulix.Data.Common
 {
@@ -15,5 +11,6 @@ namespace Qulix.Data.Common
         DateTime EndDate { get; set; }
         TaskStatus Status { get; set; }
         IPerson Executor { get; set; }
+        int ExecutorId { get; set; }
     }
 }

@@ -15,5 +15,6 @@ namespace Qulix.Data.Common
         public DateTime EndDate { get; set; }
         public TaskStatus Status { get; set; }
         public IPerson Executor { get; set; }
+        public int ExecutorId { get; set; }
     }
 }

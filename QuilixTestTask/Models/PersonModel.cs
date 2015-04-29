@@ -14,12 +14,13 @@ namespace Qulix.Web.Models
         { }
         public PersonModel(IPerson person)
         {
-            // TODO: Complete member initialization
             this.PersonId = person.PersonId;
             this.FirstName = person.FirstName;
             this.SecondName = person.SecondName;
             this.LastName = person.LastName;
         }
+
+        [Display(Name = "Id")]
         public int PersonId { get; set; }
 
         [Display(Name = "First name")]

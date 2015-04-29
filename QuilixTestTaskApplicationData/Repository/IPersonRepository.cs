@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Qulix.Data.Common;
+using System;
 namespace Qulix.Data.Repository
 {
-    public interface IPersonRepository : IEntityRepository<Qulix.Data.Common.IPerson>
+    public interface IPersonRepository : IEntityRepository<int, IPerson>
     {
-        Qulix.Data.Common.IPerson Create(Qulix.Data.Common.IPerson entity);
-        void Delete(Qulix.Data.Common.IPerson entity);
-        System.Collections.Generic.ICollection<Qulix.Data.Common.IPerson> GetAllEnities();
-        Qulix.Data.Common.IPerson Update(Qulix.Data.Common.IPerson entity);
-        Qulix.Data.Common.IPerson FindById(int id);
+        IPerson FindById(int id);
+        void DeleteById(int id);
     }
 }

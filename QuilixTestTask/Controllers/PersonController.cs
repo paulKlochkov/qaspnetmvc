@@ -22,7 +22,7 @@ namespace Qulix.Web.Controllers
             return View(personRowModel);
         }
 
-       
+
 
         // GET: Person/Create
         public ActionResult Create()
@@ -36,8 +36,7 @@ namespace Qulix.Web.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
+                _personRepository.Create(model);
                 return RedirectToAction("PersonList");
             }
             catch
@@ -46,7 +45,6 @@ namespace Qulix.Web.Controllers
             }
         }
 
-        // GET: Person/Edit/5
         public ActionResult Edit(int id)
         {
             IPerson person = _personRepository.FindById(id);
@@ -54,17 +52,12 @@ namespace Qulix.Web.Controllers
             return View(model);
         }
 
-        // POST: Person/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, PersonModel model)
         {
             try
             {
-                // TODO: Add update logic here
-                var person = StaticDS.Persons.FirstOrDefault(x => x.PersonId == id);
-                person.LastName = model.LastName;
-                person.SecondName = model.SecondName;
-                person.FirstName = model.FirstName;
+                _personRepository.Update(id, model);
                 return RedirectToAction("PersonList");
             }
             catch
@@ -76,19 +69,18 @@ namespace Qulix.Web.Controllers
         // GET: Person/Delete/5
         public ActionResult Delete(int id)
         {
-            var person = StaticDS.Persons.FirstOrDefault(x => x.PersonId == id);
-            return View(person);
+            PersonModel model = new PersonModel(_personRepository.FindById(id));
+            return View(model);
         }
 
         // POST: Person/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, FormCollection model)
         {
             try
             {
                 // TODO: Add delete logic here
-                var person = StaticDS.Persons.FirstOrDefault(x => x.PersonId == id);
-                StaticDS.Persons.Remove(person);
+                _personRepository.DeleteById(id);
                 return RedirectToAction("PersonList");
             }
             catch

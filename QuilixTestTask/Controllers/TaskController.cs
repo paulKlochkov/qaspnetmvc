@@ -4,30 +4,22 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Qulix.Web.Models;
+using Qulix.Data.Repository;
+using Qulix.Data.Common;
 
 namespace Qulix.Web.Controllers
 {
     public class TaskController : Controller
     {
-        // GET: Task
-        public ActionResult Index()
-        {
-            return View();
-        }
+        private ITaskRepository _taskRepository = new TaskRepository();
+
         public ActionResult TaskList()
         {
-            List<TaskModel> tasks = new List<TaskModel>(StaticDS.Tasks.Count);
-            foreach (var task in StaticDS.Tasks)
-            {
-                tasks.Add(new TaskModel(task));
-            }
-            return View(tasks);
+            ICollection<ITask> tasks = _taskRepository.GetAllEnities();
+            List<TaskModel> taskModels = tasks.Select(x => new TaskModel(x)).ToList();
+            return View(taskModels);
         }
-        // GET: Task/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+
 
         // GET: Task/Create
         public ActionResult Create()
@@ -42,15 +34,7 @@ namespace Qulix.Web.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-                StaticDS.Tasks.Add(new Qulix.Data.Common.Task
-                {
-                    EndDate = model.EndDate,
-                    StartDate = model.StartDate,
-                    Name = model.Name,
-                    Status = model.Status,
-                    Executor = StaticDS.Persons.FirstOrDefault(x => x.PersonId == model.ExecutorId)
-                });
+                _taskRepository.Create(model);
                 return RedirectToAction("TaskList");
             }
             catch
@@ -62,18 +46,18 @@ namespace Qulix.Web.Controllers
         // GET: Task/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(StaticDS.Tasks.FirstOrDefault(x => x.TaskId == id));
+            ITask task = _taskRepository.FindById(id);
+            TaskCreateModel model = new TaskCreateModel(task);
+            return View(model);
         }
 
         // POST: Task/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, TaskModel model)
+        public ActionResult Edit(int id, TaskCreateModel model)
         {
             try
             {
-                // TODO: Add update logic here
-                var obj = StaticDS.Tasks.FirstOrDefault(x => x.TaskId == id);
-
+                _taskRepository.Update(id, model);
                 return RedirectToAction("TaskList");
             }
             catch
@@ -85,8 +69,8 @@ namespace Qulix.Web.Controllers
         // GET: Task/Delete/5
         public ActionResult Delete(int id)
         {
-            var obj = new TaskModel(StaticDS.Tasks.FirstOrDefault(x => x.TaskId == id));
-            return View(obj);
+            TaskModel model = new TaskModel(_taskRepository.FindById(id));
+            return View(model);
         }
 
         // POST: Task/Delete/5
@@ -95,9 +79,7 @@ namespace Qulix.Web.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-                var obj = StaticDS.Tasks.FirstOrDefault(x => x.TaskId == id);
-                StaticDS.Tasks.Remove(obj);
+                _taskRepository.DeleteById(id);
                 return RedirectToAction("TaskList");
             }
             catch
