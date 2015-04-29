@@ -92,9 +92,6 @@ namespace Qulix.Data.Repository
         /// <returns>Updated value</returns>
         public IPerson Update(int key, IPerson value)
         {
-            //person.FirstName = value.FirstName;
-            //person.LastName = value.LastName;
-            //person.SecondName = value.SecondName;
             using (var wrapper = ConnectionPool.Instance.GetConnection())
             {
                 SqlConnection connection = wrapper.Instance;
